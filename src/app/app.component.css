@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono&subset=cyrillic,cyrillic-ext,latin-ext');
+
+* {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 18px;
+}
+
+.logo {
+    margin-top: 10px;
+    color: rgb(0, 153, 255);
+    font-weight: 600;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    font-size: 46px!important;
+}
+
+.btn {
+    margin: 10px;
+    font-size: 18px;
+}
+
+.form-control {
+    margin: 10px;
+}
+
+.table {
+    margin-top: 10px;
+}
+
