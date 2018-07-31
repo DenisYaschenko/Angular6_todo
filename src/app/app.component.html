@@ -2,8 +2,14 @@
 <div class="container">
   <div>
     <form class="row justify-content-center">
-      <input type="text" class="form-control col-lg-9" aria-describedby="inputGroup-sizing-lg" placeholder="What has to be done?" #TodoAction>
-      <button type="button" class="btn btn-primary col-lg-2" (click)="AddItem(TodoAction.value); TodoAction.value=''">Add</button>
+      <input type="text" 
+      class="form-control col-lg-12" 
+      aria-describedby="inputGroup-sizing-lg" 
+      placeholder="What has to be done?" 
+      (keyup.enter)="addItem()" 
+      [(ngModel)]="newItem"
+      name="item"
+      >
     </form>
   </div>
   <div class="row justify-content-center">
@@ -12,19 +18,23 @@
         <tr>
           <th></th>
           <th>Description</th>
-          <th>Done</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of getTodoItems()">
-          <th><input type="checkbox" [(ngModel)]="item.done"></th>
+        <tr *ngFor='let item of todoList | filter: itemFilter; let ind = index' [ngClass]="{'done': item.done}">
+          <th><input type="checkbox" 
+            (click)="dones(item)" 
+            [checked]="item.done">
+          </th>
           <td> {{item.descr}} </td>
-          <td [ngSwitch]="item.done">
-            <span *ngSwitchCase="true">Yes</span>
-            <span *ngSwitchDefault>No</span>
-          </td>
+          <td><button type="button" class="btn btn-danger" (click)="deleteAnItem(ind)">Delete</button></td>
         </tr>
       </tbody>
     </table>
+    <button type="button" class="btn btn-outline-warning" (click)="clearList()">Delete list of item</button>
+    <button type="button" class="btn btn-outline-info" (click)="showStatus('All')">All</button>
+    <button type="button" class="btn btn-outline-primary" (click)="showStatus('Active')">Active</button>
+    <button type="button" class="btn btn-outline-success" (click)="showStatus('Notactive')">Complited</button>
   </div>
 </div>

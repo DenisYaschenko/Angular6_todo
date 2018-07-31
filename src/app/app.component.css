@@ -23,7 +23,27 @@
     margin: 10px;
 }
 
+input[type="checkbox"] {
+    margin-top: 5px;
+    width: 20px;
+    height: 20px;
+}
+
 .table {
     margin-top: 10px;
 }
 
+tr {
+    /* vertical-align: center; */
+    transition: .3s;
+    background: #ffb8b8;
+}
+
+.btn-danger {
+    padding: 2px 4px!important;
+    margin: 0!important;
+}
+
+.done {
+    background: #c6ffb8;
+}
