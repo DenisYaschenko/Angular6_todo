@@ -20,30 +20,40 @@
 }
 
 .form-control {
-    margin: 10px;
+    margin: 10px 0;
 }
 
 input[type="checkbox"] {
     margin-top: 5px;
+    margin-right: 10px;
     width: 20px;
     height: 20px;
 }
 
-.table {
-    margin-top: 10px;
-}
-
-tr {
-    /* vertical-align: center; */
-    transition: .3s;
-    background: #ffb8b8;
-}
-
-.btn-danger {
+.btn-light, .btn-danger {
     padding: 2px 4px!important;
     margin: 0!important;
 }
 
 .done {
     background: #c6ffb8;
+}
+
+.btn-outline-warning{
+    display: none;
+}
+
+.blockw {
+    display: block;
+}
+
+ul {
+    overflow: auto;
+    width: 100%;
+}
+
+li {
+    width: 100%;
+    margin: 5px 0;
+    height: 60px;
 }

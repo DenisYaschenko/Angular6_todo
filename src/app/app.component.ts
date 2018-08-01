@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodolistService } from './todolist.service';
+// import { findLast } from '@angular/compiler/src/directive_resolver';
 
 
 
@@ -19,7 +20,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.getTodoListFromStorage();
   }
-
 // Add an item
 
   addItem() {
@@ -29,7 +29,8 @@ export class AppComponent implements OnInit {
     if (this.newItem) {
         this.todoList.push({
         descr: this.newItem,
-        done: false
+        done: false,
+        edit: false
       });
       this.newItem = '';
       // save to localstorage
@@ -37,7 +38,7 @@ export class AppComponent implements OnInit {
     } else {
       alert('You shouldn\'t do it, Brooo');
     }
-    console.log(this.todoList);
+    // console.log(this.todoList);
   }
 
   // change the status of item
@@ -50,22 +51,23 @@ export class AppComponent implements OnInit {
       item.done = false;
     }
     this.saveTodoListToStorage();
-    console.log(this.todoList);
+    // console.log(this.todoList);
   }
 
   saveTodoListToStorage() {
     // console.log(this.todoList);
     this.todoStorage.setItem('todos', JSON.stringify(this.todoList));
+    this.checkTheStatusOfItem();
   }
 
   getTodoListFromStorage() {
     this.todoList = JSON.parse(this.todoStorage.getItem('todos'));
+    this.checkTheStatusOfItem();
   }
 
-  // delete the whole list
-
   clearList() {
-    this.todoList = [];
+
+    this.todoList = this.todoList.filter(item => !item.done);
     this.saveTodoListToStorage();
   }
 
@@ -74,11 +76,36 @@ export class AppComponent implements OnInit {
   deleteAnItem(ind) {
     this.todoList.splice(ind, 1);
     this.saveTodoListToStorage();
-    console.log(this.todoList);
   }
 
   showStatus(str) {
     this.itemFilter = str;
-}
+  }
+
+  checkTheStatusOfItem() {
+    let ch = false;
+    for (let i = 0; i < this.todoList.length; i++) {
+      if (this.todoList[i].done === true) {
+        ch = true;
+      }
+    }
+    return ch;
+  }
+
+  changeEdit(item) {
+    item.edit = true;
+  }
+
+  editItem(event, item) {
+    // get value from input
+    const descr = event.target.value.trim();
+    item.descr = descr;
+
+    // hide edit input field
+    item.edit = false;
+
+    // save changes to local storage
+    this.saveTodoListToStorage();
+  }
 }
 
