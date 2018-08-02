@@ -1,51 +1,54 @@
-<h1 class="logo">ToDo</h1>
+      <!-- <!-- <input type="text" class="form-control col-lg-12 input-form" aria-describedby="inputGroup-sizing-lg" placeholder="What has to be done?"
+        (keyup.enter)="addItem()" [(ngModel)]="newItem" name="item"> -->
+    <!-- </form> -->
+    <!-- <div class="row" *ngFor='let item of todoList | filter: itemFilter' [ngClass]="{'done': item.done}" class="list-group-item">
+      <div class="col-lg-12">
+        <input type="checkbox" (click)="dones(item)" [checked]="item.done">
+        <span class="itemdescr"> {{ item.descr }} </span>
+        <button type="button" class="btn btn-danger float-right" (click)="deleteAnItem(ind)">Delete
+        </button>
+        <button type="button" class="btn btn-light float-right" (click)="changeEdit(item)">Edit
+        </button>
+        <input autofocus [hidden]="!item.edit" (keyup.enter)="editItem($event, item)" [value]="item.descr" type="text" class="col-lg-12 style-edit">
+      </div>
+    </div>
+    <div class="row justify-content-center" *ngIf="todoList.length > 0">
+      <button type="button" class="btn btn-outline-warning" (click)="clearList()" [ngClass]="{'blockw': checkTheStatusOfItem()}">Clear completed</button>
+      <button type="button" class="btn btn-outline-info" (click)="showStatus('All')">All</button>
+      <button type="button" class="btn btn-outline-primary" (click)="showStatus('Active')">Active</button>
+      <button type="button" class="btn btn-outline-success" (click)="showStatus('Notactive')">Complited</button>
+    </div>
+  </div> -->
+
 <div class="container">
-  <div>
-    <form class="row justify-content-center">
-      <input type="text" class="form-control col-lg-12" aria-describedby="inputGroup-sizing-lg" placeholder="What has to be done?"
-        (keyup.enter)="addItem()" [(ngModel)]="newItem" name="item">
-    </form>
+    <div class="row justify-content-center">
+      <div class="col-lg-6 ">
+        <h1 class="todoapp">todos</h1>
+        <input type="text" class="form-control new-todo" (keyup.enter)="addItem()" [(ngModel)]="newItem" placeholder="What needs to be done?">
+        <ul class="list-group">
+          <li *ngFor="let item of todoList | filter: itemFilter; let ind = index" class="list-group-item" [ngClass]="{'done': item.done}">
+            <input type="checkbox" (click)="dones(item)" [checked]="item.done">
+            <span class="label-padding" (dblclick)="changeEdit(item)">{{item.descr}}</span>
+            <span (click)="deleteAnItem(ind)" class="close close-style" (dblclick)="dbClick" *ngIf="newItem.length > -1">x</span>
+            <input autofocus [hidden]="!item.edit" (keyup.enter)="editItem($event, item)" [value]="item.descr" type="text" class="form-control new-todo style-edit">
+          </li>
+        </ul>
+        <footer class="footer" >
+          <ul class="filters" class="nav bcg-footer">
+            <li>
+              <a href="javascript:void(0)" (click)="showStatus('All')" class="filter_select">All</a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" (click)="showStatus('Active')" class="filter_select">Active</a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" (click)="showStatus('Notactive')" class="filter_select">Completed</a>
+            </li>	 
+            <li>
+              <a href="javascript:void(0)" (click)="clearList()"  class="filter_select clearAll" [ngClass]="{'blockw': checkTheStatusOfItem()}">Clear complited</a>
+            </li>
+          </ul> 
+        </footer>
+      </div>
+    </div>
   </div>
-  <div class="row justify-content-center" *ngIf="todoList.length > 0">
-    <ul class="list-group">
-      <li 
-        *ngFor='let item of todoList | 
-        filter: itemFilter; 
-        let ind = index' [ngClass]="{'done': item.done}"
-        class="list-group-item"
-      >
-        <input type="checkbox" 
-          (click)="dones(item)" 
-          [checked]="item.done"
-          class="ins_li"
-        > 
-        <span 
-          class="ins_li">
-          {{item.descr}}
-        </span>
-        <button type="button" class="btn btn-light ins_li" 
-          (click)="changeEdit(item)"
-        >Edit
-        </button>
-        <button 
-          type="button" 
-          class="btn btn-danger ins_li" 
-          (click)="deleteAnItem(ind)"
-          >Delete
-        </button>
-        <input 
-          autofocus 
-          [hidden]="!item.edit" 
-          (keyup.enter)="editItem($event, item)" 
-          [value]="item.descr" 
-          type="text" 
-          class="form-control style-edit ins_li"
-        >
-      </li>
-    </ul>
-    <button type="button" class="btn btn-outline-warning" (click)="clearList()" [ngClass]="{'blockw': checkTheStatusOfItem()}">Clear completed</button>
-    <button type="button" class="btn btn-outline-info" (click)="showStatus('All')">All</button>
-    <button type="button" class="btn btn-outline-primary" (click)="showStatus('Active')">Active</button>
-    <button type="button" class="btn btn-outline-success" (click)="showStatus('Notactive')">Complited</button>
-  </div>
-</div>
