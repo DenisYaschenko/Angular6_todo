@@ -33,7 +33,6 @@ export class AppComponent implements OnInit {
         edit: false
       });
       this.newItem = '';
-      // save to localstorage
       this.saveTodoListToStorage();
     } else {
       alert('You shouldn\'t do it, Brooo');
